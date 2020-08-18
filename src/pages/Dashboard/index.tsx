@@ -59,7 +59,7 @@ const Dashboard: React.FC = () => {
 
   useEffect(() => {
     async function loadFoods(): Promise<void> {
-      const foodsList = await (await api.get<Food[]>('/foods')).data;
+      const foodsList = (await api.get<Food[]>('/foods')).data;
       setFoods(foodsList);
     }
 
@@ -68,8 +68,7 @@ const Dashboard: React.FC = () => {
 
   useEffect(() => {
     async function loadCategories(): Promise<void> {
-      const categoriesList = await (await api.get<Category[]>('/categories'))
-        .data;
+      const categoriesList = (await api.get<Category[]>('/categories')).data;
       setCategories(categoriesList);
     }
 
@@ -77,7 +76,7 @@ const Dashboard: React.FC = () => {
   }, []);
 
   function handleSelectCategory(id: number): void {
-    // Select / deselect category
+    setSelectedCategory(id);
   }
 
   return (
