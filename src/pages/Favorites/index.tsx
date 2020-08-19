@@ -32,7 +32,15 @@ const Favorites: React.FC = () => {
 
   useEffect(() => {
     async function loadFavorites(): Promise<void> {
-      // Load favorite foods from api
+      const response = await api.get<Food[]>('/favorites');
+
+      const favoritesWithFormattedPrice = response.data.map(food => {
+        return {
+          ...food,
+          formattedPrice: formatValue(food.price),
+        };
+      });
+      setFavorites(favoritesWithFormattedPrice);
     }
 
     loadFavorites();
